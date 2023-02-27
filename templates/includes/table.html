@@ -1,0 +1,16 @@
+{% block table %}
+    <div class="container">
+        <table border="1px">
+            <tr>
+                {% for title in data.keys() %}
+                    <th>{{ title }}</th>
+                {% endfor %}
+            </tr>
+            <tr>
+                {% for data in data.values() %}
+                    <td>{{ data }}</td>
+                {% endfor%}
+            </tr>
+        </table>
+    </div>
+{% endblock %}

@@ -1,6 +1,6 @@
 
 from flask_login import UserMixin
-from init_db import db
+from models.init_db import db
 from sqlalchemy import Column, String, Integer, UUID, Boolean
 
 class Users(db.Model, UserMixin):

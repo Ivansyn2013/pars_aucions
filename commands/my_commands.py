@@ -1,6 +1,26 @@
 from flask import Blueprint
+from models.users import Users
+from models.init_db import db
+from colorama import Fore
 
 my_commands_app = Blueprint('my_command', __name__)
-@
-def init_db():
 
+
+@my_commands_app.cli.command('init-db')
+def init_db():
+    '''CLI command for init db'''
+    db.drop_all()
+    db.create_all()
+    print(Fore.GREEN + 'Db inited!!!' + Fore.RESET)
+
+
+@my_commands_app.cli.command("create-user")
+def create_user():
+    '''
+    Cli command for create Flask user in db
+    > Created user: user
+    '''
+    admin = Users(user_name='admin', is_staff=True)
+    db.session.add(admin)
+    db.session.commit()
+    print(Fore.GREEN + f'User added {admin}' + Fore.RESET)

@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% block body %}
+
+    <div class="container">
+        <h2>Table</h2>
+    </div>
+    {% block table %}
+        <div class="container">
+            <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                <table class="table">
+                    <tr>
+                        {% for title in data.keys() %}
+                            <th>{{ title }}</th>
+                        {% endfor %}
+                    </tr>
+                    <tr>
+                        {% for data in data.values() %}
+                            <td>{{ data }}</td>
+                        {% endfor %}
+                    </tr>
+                </table>
+            </div>
+            <button class="btn btn-primary" type="button">Добавить</button>
+        </div>
+
+
+        </div>
+
+    {% endblock %}
+
+{% endblock %}

@@ -5,7 +5,12 @@ from commands.my_commands import my_commands_app
 from views.auth import auth_app, login_manager
 from models.init_db import db
 from logic.common_main import get_data
+from dotenv import load_dotenv
+import os
 
+load_dotenv()
+config_class = os.getenv("CONFIG_CLASS")
+print(config_class)
 #Create app
 app = Flask(__name__)
 
@@ -15,7 +20,7 @@ app.register_blueprint(my_commands_app)
 app.register_blueprint(auth_app, url_prefix="/auth")
 
 #Config
-app.config.from_object(DevelopmentConfig)
+app.config.from_object(f'config.config.{config_class}')
 
 #Database
 db.init_app(app)

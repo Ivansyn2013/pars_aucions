@@ -7,6 +7,7 @@
     {% block table %}
         <div class="container">
             <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+
                 <table class="table">
                     <tr>
                         {% for title in data.keys() %}
@@ -19,8 +20,20 @@
                         {% endfor %}
                     </tr>
                 </table>
+
             </div>
-            <button class="btn btn-primary" type="button">Добавить</button>
+
+            <form method="post">
+                <label for="input-claim_number">Введи номер аукциона:</label>
+                <input
+                id="input-claim_number"
+                type="text"
+                name="claim_number"
+                required
+                >
+                <button class="btn btn-primary" type="submit">Добавить</button>
+            </form>
+
         </div>
 
 

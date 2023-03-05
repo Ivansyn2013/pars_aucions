@@ -2,6 +2,16 @@
 {% block body %}
 <div class="container">
     <h1>
+    Hello
+    {% if current_user.is_authenticated %}
+    {{ current_user.username }}
+    {% else %}
+    anon
+    {% endif %}
+</h1>
+</div>
+<div class="container">
+    <h1>
         Данный сайт находится в разработке. Цель: создание портала для реализации рабочих функий персонала компании АМТ.
         В настоящий момент работает вкладка с таблицей аукционая, при прохождении авторизации пользователя.
     </h1>

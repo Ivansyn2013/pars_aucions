@@ -20,7 +20,6 @@ class DeployConfig(Config):
     logging.basicConfig(level=logging.WARNING)
     config = dotenv_values(".env")
     TESTING = config["TESTING"]
-    DATABASE_URI = config['DATABASE_URI']
     SQLALCHEMY_DATABASE_URI = config['SQLALCHEMY_DATABASE_URI']
     SQLALCHEMY_MODIFICATIONS = config['SQLALCHEMY_MODIFICATIONS']
     SECRET_KEY = config['SECRET_KEY']

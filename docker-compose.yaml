@@ -6,31 +6,26 @@ services:
     ports:
       - "80:80"
     volumes:
-      - "./nginx.conf:/etc/nginx/conf.d/default.conf"
+      - "./Deploy/nginx.conf:/etc/nginx/conf.d/default.conf"
     depends_on:
-      - app
-      - db
+      - app_amt
+      - pg
   app_amt:
     build:
-      dockerfile: ../Dockerfile
+      dockerfile: ./Dockerfile
       context: .
-    env_file:
-      - ../.env
 
-    environment:
-      SQLALCHEMY_DATABASE_URI: postgresql://user:password@pg:5432/blog
-      CONFIG_NAME: DevConfig
-    volumes:
-    - ./blog:/app/blog
+    env_file:
+      - ./.env
     ports:
-    - 5001:5001
+    - '5001:5001'
     depends_on:
       - pg
   pg:
     image: postgres:12
     env_file:
-      - ../.env
+      - ./.env
     volumes:
     - ${HOME}/dbs/flask-lesson/pgdata_dev:/var/lib/postgresql/data/pgdata
     ports:
-    - 5432:5432
+    - '5432:5432'

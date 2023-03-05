@@ -4,10 +4,12 @@
     <div class="container">
         <h2>Table</h2>
     </div>
-    {% block table %}
+
         <div class="container">
             <div class="d-grid gap-2 d-md-flex justify-content-md-end">
 
+                {% block table %}
+                    {{ super() }}
                 <table class="table">
                     <tr>
                         {% for title in data.keys() %}
@@ -20,9 +22,11 @@
                         {% endfor %}
                     </tr>
                 </table>
+                {% endblock %}
 
             </div>
 
+            {% block table_form %}
             <form method="post">
                 <label for="input-claim_number">Введи номер аукциона:</label>
                 <input
@@ -33,12 +37,13 @@
                 >
                 <button class="btn btn-primary" type="submit">Добавить</button>
             </form>
+            {% endblock %}
 
         </div>
 
 
         </div>
 
-    {% endblock %}
+
 
 {% endblock %}

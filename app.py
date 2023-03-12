@@ -1,6 +1,7 @@
 from flask import Flask, render_template, jsonify
 from views.table import table_app
-from config.config import DevelopmentConfig
+
+from flask_migrate import  Migrate
 from commands.my_commands import my_commands_app
 from views.auth import auth_app, login_manager
 from models.init_db import db
@@ -24,6 +25,8 @@ app.config.from_object(f'config.config.{config_class}')
 
 #Database
 db.init_app(app)
+migrate = Migrate()
+migrate.init_app(app, db, compare_type=True)
 
 #Auth
 login_manager.init_app(app)

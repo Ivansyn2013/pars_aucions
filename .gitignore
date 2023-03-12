@@ -3,3 +3,4 @@
 .env
 /.env
 /instance/db.db
+/my_test/

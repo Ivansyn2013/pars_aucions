@@ -1,4 +1,3 @@
-from config.config import DeployConfig
 import logging
 from logs import my_loger
 
@@ -7,7 +6,6 @@ ls2 = ['a','b','d']
 
 print(dict(zip(ls1, ls2)))
 
-print(DeployConfig.TESTING)
 print('secret key',DeployConfig.SECRET_KEY)
 
 

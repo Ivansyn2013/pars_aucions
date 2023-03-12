@@ -1,5 +1,5 @@
 from flask import Blueprint
-from models.users import Users
+from models.users import User
 from models.init_db import db
 from colorama import Fore
 import os
@@ -23,7 +23,14 @@ def create_user():
     Cli command for create Flask user in db
     > Created user: user
     '''
-    admin = Users(user_name='admin', is_staff=True)
+    admin = User(user_name='admin', is_staff=True)
     db.session.add(admin)
     db.session.commit()
     print(Fore.GREEN + f'User added {admin}' + Fore.RESET)
+
+@my_commands_app.cli.command('drop_all')
+def drop_all():
+    '''CLI command for drop all tables in db'''
+
+    db.drop_all()
+    print(Fore.GREEN + 'Db Droped!!!' + Fore.RESET)

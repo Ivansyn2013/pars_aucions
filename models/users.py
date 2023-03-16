@@ -90,6 +90,6 @@ class Auction(db.Model):
     event_description = Column(Text)
     event_date = Column(DateTime)
 
-    project = Column(String(300), ForeignKey('project.id',
+    project = Column(String(300), ForeignKey('projects.id',
                                              ondelete='CASCADE'),
                      nullable=False)

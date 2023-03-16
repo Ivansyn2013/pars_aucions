@@ -18,6 +18,7 @@ class User(db.Model, UserMixin):
     id = Column(String(300), unique=True, primary_key=True, default=str(uuid.uuid4()))
     first_name = Column(String(80), unique=False, nullable=False)
     last_name = Column(String(80), unique=False, nullable=False)
+    username = Column(String(80), unique=True, nullable=False, default='', server_default='')
     email = Column(String(200), unique=True, nullable=False)
     role = Column(ARRAY(String(80)), nullable=False, default='usual')
     _password = Column(LargeBinary, nullable=True)

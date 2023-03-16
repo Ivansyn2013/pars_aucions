@@ -23,10 +23,18 @@ def create_user():
     Cli command for create Flask user in db
     > Created user: user
     '''
-    admin = User(user_name='admin', is_staff=True)
-    db.session.add(admin)
-    db.session.commit()
-    print(Fore.GREEN + f'User added {admin}' + Fore.RESET)
+    if not User.query.filter_by(first_name='admin').one_or_none():
+        admin = User()
+        admin.email = 'example@ww.ru'
+        admin.role = ['admin']
+        admin.first_name = 'admin'
+        admin.last_name = 'admin'
+        admin.password = '123'
+        db.session.add(admin)
+        db.session.commit()
+        print(Fore.GREEN + f'User added {admin}' + Fore.RESET)
+    else:
+        print(Fore.RED + f'User admin is exists' + Fore.RESET)
 
 @my_commands_app.cli.command('drop_all')
 def drop_all():

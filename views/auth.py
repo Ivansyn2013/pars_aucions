@@ -23,7 +23,7 @@ def login():
     username = request.form.get("username")
     if not username:
         return render_template("auth/login.html", error="username not passed")
-    user = User.query.filter_by(user_name=username).one_or_none()
+    user = User.query.filter_by(username=username).one_or_none()
     if user is None:
         return render_template("auth/login.html", error=f"no user {username!r} found")
     login_user(user)

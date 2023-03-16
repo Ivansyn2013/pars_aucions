@@ -10,9 +10,13 @@ class Config(object):
 
 class DevelopmentConfig(Config):
     logging.basicConfig(level=logging.DEBUG)
+    config = dotenv_values('.env')
     TESTING = True
+    DB_PASS = config['DB_PASS']
+    DB_USER = config['DB_USER']
+    DB_PORT = config['DB_PORT']
     # DATABASE_URI = ''
-    SQLALCHEMY_DATABASE_URI = 'postgresql://user:123@localhost:5432/amt'
+    SQLALCHEMY_DATABASE_URI = f'postgresql://{DB_USER}:{DB_PASS}@localhost:{DB_PORT}/amt'
     SQLALCHEMY_MODIFICATIONS = False
     SECRET_KEY = 'abcdefg123456'
 

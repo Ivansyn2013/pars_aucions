@@ -9,9 +9,10 @@ from logic.common_main import get_data
 from dotenv import load_dotenv
 import os
 
+from config.config import DevelopmentConfig
+
 load_dotenv()
 config_class = os.getenv("CONFIG_CLASS")
-print(config_class)
 #Create app
 app = Flask(__name__)
 

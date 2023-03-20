@@ -4,6 +4,7 @@ from views.table import table_app
 from flask_migrate import  Migrate
 from commands.my_commands import my_commands_app
 from views.auth import auth_app, login_manager
+from views.project import project_app
 from models.init_db import db
 from logic.common_main import get_data
 from dotenv import load_dotenv
@@ -20,6 +21,7 @@ app = Flask(__name__)
 app.register_blueprint(table_app)
 app.register_blueprint(my_commands_app)
 app.register_blueprint(auth_app, url_prefix="/auth")
+app.register_blueprint(project_app, url_prefix='/projects')
 
 #Config
 app.config.from_object(f'config.config.{config_class}')

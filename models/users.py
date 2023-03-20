@@ -69,8 +69,8 @@ class Project(db.Model):
     last_update = Column(DateTime, nullable=True)
 
     auctions = relationship(
-        'Article',
-        back_populates='project',
+        'Auction',
+        backref='project',
         uselist=True,
     )
     user = relationship(
@@ -85,11 +85,12 @@ class Auction(db.Model):
     id = Column(String(300), unique=True, primary_key=True,
                 default=str(uuid.uuid4()))
     claim_number = Column(Integer, unique=True, nullable=False)
+    created_at = Column(DateTime, default=datetime.utcnow())
     claim_object = Column(Text)
     pub_date = Column(DateTime)
     event_description = Column(Text)
     event_date = Column(DateTime)
 
-    project = Column(String(300), ForeignKey('projects.id',
+    project_id = Column(String(300), ForeignKey('projects.id',
                                              ondelete='CASCADE'),
                      nullable=False)

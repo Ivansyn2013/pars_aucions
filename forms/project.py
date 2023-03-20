@@ -3,16 +3,14 @@ from wtforms import StringField, TextAreaField, SubmitField, validators, SelectM
 
 class CreateProjectForm(FlaskForm):
     name = StringField(
-        'Title',
+        'Имя',
         [validators.DataRequired()],
     )
     status = TextAreaField(
-        "Body",
+        "Статус",
         [validators.DataRequired()],
     )
-    auctions = 'здесь должно быть поле с выбором или номер тогда надо функцию вызывать'
-    users = SelectMultipleField(
-
-    )
+    auctions =  SelectMultipleField('Аукцион', coerce=str)
+    users = SelectMultipleField('Пользователи', coerce=str)
 
     submit = SubmitField("Publish")

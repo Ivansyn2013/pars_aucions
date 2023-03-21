@@ -17,8 +17,8 @@
       {% for field_name in ['name', 'status', 'auctions', 'users',] %}
       {% set field = form[field_name] %}
         <div class="form-group">
-          {{ field.label(class="from-label") }}
-          {{ field(class="from-control") }}
+          {{ field.label(class="form-label") }}
+          {{ field(class="form-control") }}
         </div>
       {% endfor %}
       {{ form.submit(class="btn btn-primary my-3") }}

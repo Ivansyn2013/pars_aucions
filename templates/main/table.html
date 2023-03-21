@@ -19,6 +19,12 @@
                         {% for data in data.values() %}
                             <td>{{ data }}</td>
                         {% endfor %}
+                      <td>
+                        <button onclick="saveAuction_indb({{ data.items() }})"
+                                type="button"
+                                class="btn
+                      btn-secondary">Добавить в базу</button>
+                      </td>
                     </tr>
                 </table>
                 {% endblock %}

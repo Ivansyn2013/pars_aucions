@@ -1,6 +1,9 @@
 import requests
 from bs4 import BeautifulSoup
-
+from models.init_db import db
+from models.users import Auction
+from sqlalchemy.exc import IntegrityError
+from logs.init_logger import my_loger
 def get_data(claim_number='0373100037223000034',
              url='https://zakupki.gov.ru/epz/order/notice/rss'):
     '''take number of claim and url
@@ -27,6 +30,22 @@ def get_data(claim_number='0373100037223000034',
     dict_of_pairs['pub_date'] = pub_date
     return dict_of_pairs
 
+def save_get_data_indb(claim_number):
+    data = get_data(claim_number)
+    auction = Auction()
+    auction.claim_object = data['Наименование объекта закупки']
+    auction.event_description = data['Описание события']
+    auction.claim_number = data['Номер закупки']
+    auction.pub_date = data['pub_date']
+    auction.event_date = data['Дата и время события']
+    db.session.add(auction)
+    try:
+        db.session.commit()
+    except IntegrityError as error:
+        my_loger.error(f'Ошибка из savegetdata {error}')
+        return None
+    my_loger.info('Сохранен новый аукцион в базе')
+    return True
 
 if __name__ == '__main__':
     print(get_data('0373100037223000034'))

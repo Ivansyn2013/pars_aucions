@@ -7,6 +7,7 @@ from models.init_db import db
 from models.users import Project, User, Auction
 from sqlalchemy.exc import IntegrityError
 from sqlalchemy.orm import joinedload
+from logic.common_main import save_get_data_indb
 
 project_app = Blueprint('project_app',__name__)
 
@@ -53,5 +54,15 @@ def details(project_id):
     if project is  None:
         return NotFound
     return render_template('project/details.html', project=project)
+
+
+@project_app.route('/save_auction', methods=['POST'])
+@login_required
+def save_auction(claim_number):
+    if save_get_data_indb(claim_number):
+        return True
+    else:
+        return False
+
 
 

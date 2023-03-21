@@ -13,4 +13,4 @@ class CreateProjectForm(FlaskForm):
     auctions =  SelectMultipleField('Аукцион', coerce=str)
     users = SelectMultipleField('Пользователи', coerce=str)
 
-    submit = SubmitField("Publish")
+    submit = SubmitField("Создать")

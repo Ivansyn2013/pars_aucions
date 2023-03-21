@@ -12,3 +12,8 @@ function callGetData() {
 function addTableRow(data) {
     console.log(data)
 }
+
+function saveAuction_indb(claim_number, event) {
+
+    console.log((claim_number))
+}

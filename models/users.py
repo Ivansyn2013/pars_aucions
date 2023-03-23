@@ -1,7 +1,7 @@
 from flask_login import UserMixin
 from models.init_db import db
 from sqlalchemy import Column, String, Integer, Boolean, ARRAY, ForeignKey, \
-    Table, LargeBinary, DateTime, Text
+    Table, LargeBinary, DateTime, Text, BigInteger
 from sqlalchemy.orm import relationship, backref
 from datetime import datetime
 import flask_bcrypt
@@ -84,7 +84,7 @@ class Auction(db.Model):
     __tablename__ = 'auctions'
     id = Column(String(300), unique=True, primary_key=True,
                 default=str(uuid.uuid4()))
-    claim_number = Column(Integer, unique=True, nullable=False)
+    claim_number = Column(BigInteger, unique=True, nullable=False)
     created_at = Column(DateTime, default=datetime.utcnow())
     claim_object = Column(Text)
     pub_date = Column(DateTime)
@@ -93,4 +93,4 @@ class Auction(db.Model):
 
     project_id = Column(String(300), ForeignKey('projects.id',
                                              ondelete='CASCADE'),
-                     nullable=False)
+                     nullable=True)

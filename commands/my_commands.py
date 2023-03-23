@@ -29,6 +29,7 @@ def create_user():
         admin.role = ['admin']
         admin.first_name = 'admin'
         admin.last_name = 'admin'
+        admin.username = 'admin'
         admin.password = '123'
         db.session.add(admin)
         db.session.commit()
@@ -42,3 +43,10 @@ def drop_all():
 
     db.drop_all()
     print(Fore.GREEN + 'Db Droped!!!' + Fore.RESET)
+
+@my_commands_app.cli.command('create_all')
+def create_all():
+    '''CLI command for create all tables in db'''
+
+    db.create_all()
+    print(Fore.GREEN + 'Db created!!!' + Fore.RESET)

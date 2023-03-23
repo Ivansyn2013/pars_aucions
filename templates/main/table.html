@@ -5,11 +5,11 @@
         <h2>Table</h2>
     </div>
 
-        <div class="container">
-            <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+    <div class="container">
+        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
 
-                {% block table %}
-                <table class="table">
+            {% block table %}
+                <table id="auction-table" class="table">
                     <tr>
                         {% for title in data.keys() %}
                             <th>{{ title }}</th>
@@ -19,35 +19,36 @@
                         {% for data in data.values() %}
                             <td>{{ data }}</td>
                         {% endfor %}
-                      <td>
-                        <button onclick="saveAuction_indb({{ data.items() }})"
-                                type="button"
-                                class="btn
-                      btn-secondary">Добавить в базу</button>
-                      </td>
+                        <td>
+                            <button onclick= "sendDataToBack(event);"
+                                    type="button"
+                                    class="btn
+                      btn-secondary">Добавить в базу
+                            </button>
+                        </td>
                     </tr>
                 </table>
-                {% endblock %}
-
-            </div>
-
-            {% block table_form %}
-            <form method="post">
-                <label for="input-claim_number">Введи номер аукциона:</label>
-                <input
-                id="input-claim_number"
-                type="text"
-                name="claim_number"
-                required
-                >
-                <button class="btn btn-primary" type="submit">Добавить</button>
-            </form>
             {% endblock %}
 
         </div>
 
+        {% block table_form %}
+            <form method="post">
+                <label for="input-claim_number">Введи номер аукциона:</label>
+                <input
+                        id="input-claim_number"
+                        type="text"
+                        name="claim_number"
+                        required
+                >
+                <button class="btn btn-primary" type="submit">Добавить</button>
+            </form>
+        {% endblock %}
 
-        </div>
+    </div>
+
+
+    </div>
 
 
 

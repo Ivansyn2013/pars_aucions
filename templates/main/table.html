@@ -33,7 +33,7 @@
         </div>
 
         {% block table_form %}
-            <form method="post">
+            <form method="#">
                 <label for="input-claim_number">Введи номер аукциона:</label>
                 <input
                         id="input-claim_number"
@@ -41,7 +41,7 @@
                         name="claim_number"
                         required
                 >
-                <button class="btn btn-primary" type="submit">Добавить</button>
+                <button onclick="callGetData(event)" class="btn btn-primary" type="submit">Добавить</button>
             </form>
         {% endblock %}
 

@@ -21,7 +21,7 @@ _projects_indetifier = db.Table('projects_indetifier',
 class User(db.Model, UserMixin):
     __tablename__ = 'users'
     id = Column(String(300), unique=True, primary_key=True,
-                default=str(uuid.uuid4()))
+                default=lambda:str(uuid.uuid4()))
     first_name = Column(String(80), unique=False, nullable=False)
     last_name = Column(String(80), unique=False, nullable=False)
     username = Column(String(80), unique=True, nullable=False, default='',

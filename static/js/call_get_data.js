@@ -1,12 +1,21 @@
-function callGetData() {
+function callGetData(event) {
+
+    const myForm = event.target.parentNode;
+    const formData = new FormData(myForm);
     fetch('/execute_get_data', {
         method: "POST",
-    })
+        headers: {
+                    "Content-Type": "application/json",
+                },
+        body: JSON.stringify(formData),
+        })
         .then(response => response.json())
         .then(data => {
             console.log(data.result);
-            addTableRow(data.result);
-        })
+
+        }).catch(error => {
+            console.log(error)
+    })
 }
 
 function addTableRow(data) {

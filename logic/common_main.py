@@ -1,4 +1,5 @@
 import requests
+from requests.exceptions import ConnectTimeout
 from bs4 import BeautifulSoup
 from models.init_db import db
 from models.users import Auction
@@ -11,24 +12,28 @@ def get_data(claim_number='0373100037223000034',
 
     HEADERS = {'User-Agent': 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:109.0) Gecko/20100101 Firefox/109.0'}
     params = {'regNumber':claim_number}
-    responce = requests.get(url, headers=HEADERS, params=params)
+    try:
+        responce = requests.get(url, headers=HEADERS, params=params, timeout=15)
+    except ConnectTimeout:
+        return f'Ошибка время ожидания ответа от сервера закончилось'
 
-    print(responce.status_code)
-    soup = BeautifulSoup(responce.text, features='xml')
-    pub_date = soup.find('pubDate').text
-    result = soup.find_all('description')
-    print(len(result))
+    if responce.status_code == 200:
+        soup = BeautifulSoup(responce.text, features='xml')
+        pub_date = soup.find('pubDate').text
+        result = soup.find_all('description')
 
-    for_dict = result[1].text.replace('<strong>','').\
-        replace('</strong>','').split('<br/>')
-    pairs_of_text = []
-    for iteam in for_dict:
-        if iteam:
-            pairs_of_text.append(tuple(iteam.split(':',1)))
 
-    dict_of_pairs = dict(pairs_of_text)
-    dict_of_pairs['pub_date'] = pub_date
-    return dict_of_pairs
+        for_dict = result[1].text.replace('<strong>','').\
+            replace('</strong>','').split('<br/>')
+        pairs_of_text = []
+        for iteam in for_dict:
+            if iteam:
+                pairs_of_text.append(tuple(iteam.split(':',1)))
+
+        dict_of_pairs = dict(pairs_of_text)
+        dict_of_pairs['pub_date'] = pub_date
+        return dict_of_pairs
+    return f'Ошибка {responce.status_code}'
 
 def save_get_data_indb(claim_number):
     data = get_data(claim_number)

@@ -40,6 +40,7 @@ def index():  # put application's code here
 
 @app.route('/execute_get_data', methods=['POST'])
 def execute_get_data(claim_number):
+    print(claim_number)
     result = get_data(claim_number=claim_number)
     return jsonify(result=result)
 

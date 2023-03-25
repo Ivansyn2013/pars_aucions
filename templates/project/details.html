@@ -3,10 +3,15 @@
   <title>Проект {{ project.name }}</title>
 {% endblock %}
 {% block body %}
-  <h1>{{ project.name }}</h1>
-  {% for data in project %}
+  <h1>Имя проекта {{ project.name }}</h1>
+
     <div class="container">
-      {{ data }}
+      <p>Создатель проекта {{ project.author.username }}</p>
+
+      <p> Дата создания проекта {{ project.created_at }}</p>
+      {% for auction in project.auctions %}
+      <p> Аукционы проекта {{ auction.event_description }}</p>
+        {% endfor %}
     </div>
-  {% endfor %}
+
 {% endblock %}

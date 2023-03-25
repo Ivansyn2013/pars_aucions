@@ -21,10 +21,11 @@
             Проекты
           </a>
           <ul class="dropdown-menu">
-            <li><a href="#" class="dropdown-item">Посмотреть проекты</a></li>
+            <li><a href="{{ url_for('project_app.list') }}" class="dropdown-item">Посмотреть проекты</a></li>
             <li><a href="{{ url_for('project_app.create') }} "
                    class="dropdown-item">Создать проект</a></li>
-            <li><a href="#" class="dropdown-item"></a></li>
+            <li><a href="#"
+                   class="dropdown-item"></a></li>
           </ul>
         </li>
 

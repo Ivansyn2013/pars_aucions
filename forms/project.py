@@ -1,5 +1,6 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, TextAreaField, SubmitField, validators, SelectMultipleField
+from wtforms import StringField, TextAreaField, SubmitField, validators, SelectMultipleField, HiddenField
+
 
 class CreateProjectForm(FlaskForm):
     name = StringField(
@@ -10,7 +11,7 @@ class CreateProjectForm(FlaskForm):
         "Статус",
         [validators.DataRequired()],
     )
-    auctions =  SelectMultipleField('Аукцион', coerce=str)
+    auctions = SelectMultipleField('Аукцион', coerce=str)
     users = SelectMultipleField('Пользователи', coerce=str)
 
     submit = SubmitField("Создать")

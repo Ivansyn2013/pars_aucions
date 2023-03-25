@@ -30,6 +30,7 @@ class User(db.Model, UserMixin):
     role = Column(ARRAY(String(80)), nullable=False, default='usual')
     _password = Column(LargeBinary, nullable=True)
 
+    projects_field = relationship('Project', back_populates='author')
     project = relationship('Project', secondary=_projects_indetifier,
                            back_populates='user')
     log = relationship('Log', back_populates='user')
@@ -52,7 +53,7 @@ class User(db.Model, UserMixin):
 class Log(db.Model):
     __tablename__ = 'logs'
     id = Column(String(300), unique=True, primary_key=True,
-                default=str(uuid.uuid4()))
+                default=lambda: str(uuid.uuid4()))
     user_id = Column(String, ForeignKey('users.id'), nullable=False)
 
     user = relationship('User', back_populates='log')
@@ -61,13 +62,15 @@ class Log(db.Model):
 class Project(db.Model):
     __tablename__ = 'projects'
     id = Column(String(300), unique=True, primary_key=True,
-                default=str(uuid.uuid4()))
+                default=lambda: str(uuid.uuid4()))
 
     name = Column(String(100), nullable=False)
     status = Column(String(100), nullable=False, default='active')
     created_at = Column(DateTime, default=datetime.utcnow())
     last_update = Column(DateTime, nullable=True)
+    author_id = Column(String(300), ForeignKey('users.id'), nullable=False)
 
+    author = relationship('User', back_populates='projects_field')
     auctions = relationship(
         'Auction',
         backref='project',
@@ -83,7 +86,7 @@ class Project(db.Model):
 class Auction(db.Model):
     __tablename__ = 'auctions'
     id = Column(String(300), unique=True, primary_key=True,
-                default=str(uuid.uuid4()))
+                default=lambda: str(uuid.uuid4()))
     claim_number = Column(BigInteger, unique=True, nullable=False)
     created_at = Column(DateTime, default=datetime.utcnow())
     claim_object = Column(Text)
@@ -92,5 +95,5 @@ class Auction(db.Model):
     event_date = Column(DateTime)
 
     project_id = Column(String(300), ForeignKey('projects.id',
-                                             ondelete='CASCADE'),
-                     nullable=True)
+                                                ondelete='CASCADE'),
+                        nullable=True)

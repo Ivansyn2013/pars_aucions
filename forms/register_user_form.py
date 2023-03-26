@@ -3,15 +3,23 @@ from wtforms import StringField, TextAreaField, SubmitField, validators, SelectM
 
 
 class RegisterUserForm(FlaskForm):
-    name = StringField(
+    first_name = StringField(
         'Имя',
         [validators.DataRequired()],
     )
-    status = TextAreaField(
-        "Статус",
+    last_name = StringField(
+        'Фамилия',
         [validators.DataRequired()],
     )
-    auctions = SelectMultipleField('Аукцион', coerce=str)
-    users = SelectMultipleField('Пользователи', coerce=str)
+    username = StringField(
+        'Псевдоним',
+        [validators.DataRequired()],
+    )
+
+    email = StringField(
+        'email',
+        [validators.DataRequired(),
+         validators.email()],
+    )
 
     submit = SubmitField("Создать")

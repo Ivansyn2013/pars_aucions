@@ -14,7 +14,7 @@
     <form method="post">
       {{ form.csrf_token }}
 
-      {% for field_name in ['name', 'status', 'auctions', 'users',] %}
+      {% for field_name in ['first_name', 'last_name', 'username', 'email',] %}
       {% set field = form[field_name] %}
         <div class="form-group">
           {{ field.label(class="form-label") }}

@@ -27,7 +27,7 @@ class User(db.Model, UserMixin):
     username = Column(String(80), unique=True, nullable=False, default='',
                       server_default='')
     email = Column(String(200), unique=True, nullable=False)
-    role = Column(ARRAY(String(80)), nullable=False, default='usual')
+    role = Column(ARRAY(String(80)), nullable=False, default=['usual'])
     _password = Column(LargeBinary, nullable=True)
 
     projects_field = relationship('Project', back_populates='author')

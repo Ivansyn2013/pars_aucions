@@ -11,10 +11,13 @@
     </script>
     <script defer src="{{ url_for('static', filename='js/call_get_data.js') }}">
           </script>
+    <title>
     {% block title %}
-        <title>АМТ</title>
+        АМТ
     {% endblock %}
+    </title>
 </head>
+
 <body>
 {% include '/includes/nav_bar.html' %}
     {% block body %}

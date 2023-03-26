@@ -10,17 +10,17 @@ from datetime import datetime
 table_app = Blueprint('table_app', __name__)
 
 
-@table_app.route('/table/', methods=["GET", "POST"], endpoint='/table')
+@table_app.route('/table/', methods=["GET"], endpoint='/table')
 @login_required
 def table_render():
     if request.method == "GET":
         data = get_data()
         return render_template('main/table.html',
                                data=data)
-    elif request.method == "POST":
-        data = get_data(request.form.get('claim_number'))
-        return render_template('main/table.html',
-                               data=data)
+    # elif request.method == "POST":
+    #     data = get_data(request.form.get('claim_number'))
+    #     return render_template('main/table.html',
+    #                            data=data)
 
 
 @table_app.route('/table/get_auction/', methods=["POST"], endpoint='get_auction')
@@ -30,6 +30,7 @@ def send_auction_to_db():
     get data fron js and send in db , create auction obj
     return: status ok
     '''
+
     data = request.get_json()[0]
 
     auction = Auction()

@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block title %}
+Пользователь {{ current_user.username }}
+{% endblock %}
+
+{% block body %}
+  <h1>Привет {{ current_user.username }}</h1>
+  <div class="container">
+    <table class="table">
+    {% for column in current_user.__table__.columns if column.name not in ('id', '_password')  %}
+      <tr>
+          <td>{{ column.name }}</td>
+            {% set data = column.name %}
+          <td>{{ current_user[data] }}</td>
+      </tr>
+    {% endfor %}
+    </table>
+  </div>
+
+
+{% endblock %}

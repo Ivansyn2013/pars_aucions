@@ -9,11 +9,17 @@ from models.init_db import db
 from logic.common_main import get_data
 from dotenv import load_dotenv
 import os
+from jinja2 import Environment
+from logic.addition_func import get_user_attribute
+
 
 from config.config import DevelopmentConfig
 
 load_dotenv()
 config_class = os.getenv("CONFIG_CLASS")
+
+
+
 #Create app
 app = Flask(__name__)
 
@@ -33,6 +39,10 @@ migrate.init_app(app, db, compare_type=True)
 
 #Auth
 login_manager.init_app(app)
+
+#jinja
+env = Environment()
+env.globals.update(getattr=get_user_attribute)
 
 @app.route('/')
 def index():  # put application's code here

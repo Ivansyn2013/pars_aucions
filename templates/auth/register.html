@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{%  from 'macro/form_fields.html' import render_fields %}
+
+{% block title %}
+  <title>Регистрация пользователя</title>
+{% endblock %}
+{% block body %}
+  <div class="container">
+    {% if error %}
+    <div class="alert alert-danger" role="alert">
+      {{ error }}
+    </div>
+    {% endif %}
+    <form method="post">
+      {{ form.csrf_token }}
+
+      {% for field_name in ['name', 'status', 'auctions', 'users',] %}
+      {% set field = form[field_name] %}
+        <div class="form-group">
+          {{ field.label(class="form-label") }}
+          {{ field(class="form-control") }}
+        </div>
+      {% endfor %}
+      {{ form.submit(class="btn btn-primary my-3") }}
+    </form>
+  </div>
+{% endblock %}

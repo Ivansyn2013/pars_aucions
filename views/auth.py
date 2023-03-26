@@ -1,7 +1,8 @@
 from flask import Blueprint, render_template, redirect, url_for, request
 from logic.common_main import get_data
-from flask_login import LoginManager, login_user, logout_user, login_required, login_remembered
+from flask_login import LoginManager, login_user, logout_user, login_required, current_user
 from models.users import User
+from forms.register_user_form import RegisterUserForm
 
 auth_app = Blueprint('auth_app', __name__)
 
@@ -40,6 +41,18 @@ def logout():
 def secret_view():
     return "Super secret data"
 
+@auth_app.route("/register_user/", endpoint='register_user')
+def register_user():
+    if current_user.is_authenticated:
+        return redirect('/auth/user_detail.html')
+    else:
+        form = RegisterUserForm(request.form)
+        return render_template('/auth/register.html', form=form)
+
+@auth_app.route("/user_details/", endpoint='user_details')
+@login_required
+def user_details():
+    return render_template('auth/user_detail.html')
 
 
 __all__ = [
